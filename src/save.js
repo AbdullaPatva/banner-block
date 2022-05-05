@@ -1,10 +1,21 @@
-import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { InnerBlocks } from '@wordpress/block-editor';
 
-export default function save() {
+export default function save({ attributes }) {
+	const styleSave = {
+		backgroundRepeat: attributes.repeat,
+		backgroundSize: attributes.size,
+		backgroundImage: `url(${attributes.image.url})`,
+		backgroundPosition: attributes.focalPoint
+			? `${attributes.focalPoint.x * 100}% ${
+					attributes.focalPoint.y * 100
+			  }%`
+			: '',
+		backgroundColor: attributes.backgroundColor,
+	};
+
 	return (
-		<p {...useBlockProps.save()}>
-			{__('Boilerplate – hello from the saved content!', 'boilerplate')}
-		</p>
+		<div style={styleSave}>
+			<InnerBlocks.Content />
+		</div>
 	);
 }
