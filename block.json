@@ -1,15 +1,58 @@
 {
 	"apiVersion": 2,
-	"name": "create-block/boilerplate",
-	"title": "Boilerplate",
-	"category": "widgets",
-	"icon": "smiley",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"name": "banner-block/banner",
+	"title": "Banner",
+	"category": "media",
+	"icon": "format-image",
+	"description": "Banner block written with ESNext standard and JSX support – build step required.",
 	"supports": {
-		"html": false
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"color": {
+			"background": false
+		}
 	},
-	"textdomain": "boilerplate",
+	"textdomain": "banner-block",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css",
-	"style": "file:./build/style-index.css"
+	"style": "file:./build/style-index.css",
+	"attributes": {
+		"image": {
+			"type": "object"
+		},
+		"focalPoint": {
+			"type": "object"
+		},
+		"repeat": {
+			"type": "string",
+			"default": "no-repeat"
+		},
+		"size": {
+			"type": "string",
+			"default": "auto"
+		},
+		"minHeight": {
+			"type": "object"
+		},
+		"text": {
+			"type": "string",
+			"source": "html",
+			"selector": "h2"
+		},
+		"buttonText": {
+			"type": "string",
+			"source": "html",
+			"selector": "p"
+		},
+		"buttonLink": {
+			"type": "string"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		}
+	}
 }

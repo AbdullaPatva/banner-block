@@ -5,8 +5,42 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-boilerplate {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+.wp-block-banner-block-banner {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	a {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		flex-wrap: wrap;
+		text-decoration: none;
+	}
+
+	.banner-button {
+		width: 50%;
+		cursor: pointer;
+		background: #636363;
+		border: 2px solid #ffa500;
+		margin: 0 auto;
+		color: #fff;
+	}
+}
+
+.text-box-align-left {
+	text-align: left;
+	width: 100%;
+}
+
+.text-box-align-center {
+	text-align: center;
+	width: 100%;
+}
+
+.text-box-align-right {
+	text-align: right;
+	width: 100%;
 }

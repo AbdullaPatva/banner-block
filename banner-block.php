@@ -1,16 +1,16 @@
 <?php
 /**
- * Plugin Name:       Boilerplate
- * Description:       Example block written with ESNext standard and JSX support – build step required.
+ * Plugin Name:       Banner
+ * Description:       Banner block written with ESNext standard and JSX support – build step required.
  * Requires at least: 5.7
  * Requires PHP:      7.0
  * Version:           0.1.0
- * Author:            The WordPress Contributors
+ * Author:            Abu
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       boilerplate
+ * Text Domain:       banner-block
  *
- * @package           create-block
+ * @package           banner
  */
 
 /**
