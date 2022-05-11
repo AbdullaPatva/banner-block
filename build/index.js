@@ -1,1 +1,174 @@
-!function(){"use strict";var e,r={273:function(){var e=window.wp.blocks,r=window.wp.element,n=window.wp.i18n,t=window.wp.blockEditor;(0,e.registerBlockType)("create-block/boilerplate",{edit:function(){return(0,r.createElement)("p",(0,t.useBlockProps)(),(0,n.__)("Boilerplate – hello from the editor!","boilerplate"))},save:function(){return(0,r.createElement)("p",t.useBlockProps.save(),(0,n.__)("Boilerplate – hello from the saved content!","boilerplate"))}})}},n={};function t(e){var o=n[e];if(void 0!==o)return o.exports;var i=n[e]={exports:{}};return r[e](i,i.exports,t),i.exports}t.m=r,e=[],t.O=function(r,n,o,i){if(!n){var l=1/0;for(p=0;p<e.length;p++){n=e[p][0],o=e[p][1],i=e[p][2];for(var u=!0,c=0;c<n.length;c++)(!1&i||l>=i)&&Object.keys(t.O).every((function(e){return t.O[e](n[c])}))?n.splice(c--,1):(u=!1,i<l&&(l=i));if(u){e.splice(p--,1);var a=o();void 0!==a&&(r=a)}}return r}i=i||0;for(var p=e.length;p>0&&e[p-1][2]>i;p--)e[p]=e[p-1];e[p]=[n,o,i]},t.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},function(){var e={826:0,46:0};t.O.j=function(r){return 0===e[r]};var r=function(r,n){var o,i,l=n[0],u=n[1],c=n[2],a=0;if(l.some((function(r){return 0!==e[r]}))){for(o in u)t.o(u,o)&&(t.m[o]=u[o]);if(c)var p=c(t)}for(r&&r(n);a<l.length;a++)i=l[a],t.o(e,i)&&e[i]&&e[i][0](),e[l[a]]=0;return t.O(p)},n=self.webpackChunkboilerplate=self.webpackChunkboilerplate||[];n.forEach(r.bind(null,0)),n.push=r.bind(null,n.push.bind(n))}();var o=t.O(void 0,[46],(function(){return t(273)}));o=t.O(o)}();
+/******/ (function() { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["element"];
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	!function() {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = function(module) {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	!function() {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	!function() {
+/******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	!function() {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = function(exports) {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+!function() {
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const allAttr = {
+  numberPosts: {
+    type: 'string'
+  },
+  categories: {
+    type: 'object'
+  },
+  selectedCategory: {
+    type: 'string'
+  }
+};
+
+function latestPosts(props) {
+  function onChangeCategory(e) {
+    props.setAttributes({
+      selectedCategory: e.target.value
+    });
+  }
+
+  function onChangeNumberPosts(e) {
+    props.setAttributes({
+      numberPosts: e.target.value
+    });
+  }
+
+  if (!props.attributes.categories) {
+    wp.apiFetch({
+      url: '/wp-json/wp/v2/categories'
+    }).then(categories => {
+      props.setAttributes({
+        categories
+      });
+    });
+  }
+
+  if (!props.attributes.categories) {
+    return 'loading...';
+  }
+
+  if (props.attributes.categories && props.attributes.categories.length === 0) {
+    return 'No Categories Found';
+  }
+
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+    onChange: onChangeCategory,
+    value: props.attributes.selectedCategory
+  }, props.attributes.categories.map(category => {
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("option", {
+      key: category.id,
+      value: category.id
+    }, category.name);
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
+    type: "text",
+    onChange: onChangeNumberPosts,
+    value: props.attributes.numberPosts
+  }));
+}
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)('my-first-dynamic-gutenberg-block/latest-post', {
+  title: 'Latest Post Custom Block',
+  icon: 'megaphone',
+  category: 'text',
+  attributes: allAttr,
+  edit: latestPosts
+});
+}();
+/******/ })()
+;
+//# sourceMappingURL=index.js.map
