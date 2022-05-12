@@ -22,15 +22,51 @@ function register_dynamic_block_action() {
 	wp_register_script(
 		'my-first-dynamic-gutenberg-block-script',
 		plugins_url( '/build/index.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' ),
+		array(
+			'wp-blocks',
+			'wp-i18n',
+			'wp-element',
+			'wp-editor',
+			'wp-components',
+			'wp-plugins',
+			'wp-edit-post',
+		),
 		true
+	);
+
+	wp_register_style(
+		'my-first-dynamic-gutenberg-block-script-css',
+		plugins_url( '/build/style-index.css', __FILE__ ),
 	);
 
 	register_block_type(
 		'my-first-dynamic-gutenberg-block/latest-post',
 		array(
-			'editor_script'   => 'my-first-dynamic-gutenberg-block-script',
+			'attributes'      => array(
+				'numberPosts'       => array(
+					'type' => 'string',
+				),
+				'numberColumns'     => array(
+					'type' => 'string',
+				),
+				'selectedCategory'  => array(
+					'type' => 'string',
+				),
+				'showPostThumbnail' => array(
+					'type'    => 'boolean',
+					'default' => true,
+				),
+				'showExcerpt'       => array(
+					'type'    => 'boolean',
+					'default' => true,
+				),
+				'categories'        => array(
+					'type' => 'object',
+				),
+			),
 			'render_callback' => 'my_plugin_render_block_latest_post',
+			'editor_script'   => 'my-first-dynamic-gutenberg-block-script',
+			'style'           => 'my-first-dynamic-gutenberg-block-script-css',
 		)
 	);
 
@@ -41,17 +77,40 @@ add_action( 'init', 'register_dynamic_block_action' );
  * Renders the block content
  */
 function my_plugin_render_block_latest_post( $attributes ) {
-	$posts = get_posts(
-		array(
-			'category'       => $attributes['selectedCategory'],
-			'posts_per_page' => $attributes['numberPosts'],
-		)
+	$args = array(
+		'cat'            => isset( $attributes['selectedCategory'] ) ? $attributes['selectedCategory'] : '',
+		'posts_per_page' => isset( $attributes['numberPosts'] ) ? $attributes['numberPosts'] : '1',
 	);
 
+	$posts = new WP_Query( $args );
+
 	ob_start();
-	foreach ( $posts as $post ) {
-		echo '<h2>' . $post->post_title . '</h2>';
-		echo get_the_post_thumbnail( $post->ID, 'medium' );
+	if ( $posts->have_posts() ) {
+		?>
+		 <div class="latest-posts-block has-<?php echo isset( $attributes['numberColumns'] ) ? esc_attr( $attributes['numberColumns'] ) : '3'; ?>-columns">
+			<?php
+			while ( $posts->have_posts() ) {
+				$posts->the_post();
+				?>
+			<div>
+			<h4><?php echo esc_html( get_the_title() ); ?></h4>
+				<?php
+				if ( $attributes['showPostThumbnail'] ) {
+					echo get_the_post_thumbnail( '', 'medium' );
+				}
+				if ( $attributes['showExcerpt'] ) {
+					echo esc_html( the_excerpt() );
+				}
+				?>
+			</div>
+				<?php
+			}
+			?>
+		</div>
+		<?php
+	} else {
+		echo 'No Posts Found';
 	}
+	wp_reset_postdata();
 	return ob_get_clean();
 }
