@@ -4,6 +4,7 @@ import {
 	PanelBody,
 	TextControl,
 	SelectControl,
+	RangeControl,
 } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import './style.scss';
@@ -12,7 +13,8 @@ import ServerSideRender from '@wordpress/server-side-render';
 
 const allAttr = {
 	numberColumns: {
-		type: 'string',
+		type: 'number',
+		default: 3,
 	},
 	numberPosts: {
 		type: 'string',
@@ -34,6 +36,10 @@ const allAttr = {
 };
 
 function latestPosts(props) {
+	const numOfColumns = (value) => {
+		props.setAttributes({ numberColumns: value });
+	};
+
 	const onChangeCategory = (value) => {
 		props.setAttributes({ selectedCategory: value });
 	};
@@ -95,6 +101,15 @@ function latestPosts(props) {
 						label={__('Number of posts to show')}
 						onChange={onChangeNumberPosts}
 						value={props.attributes.numberPosts}
+					/>
+				</PanelBody>
+				<PanelBody title={__('Block Style')}>
+					<RangeControl
+						label={__('Columns')}
+						min={1}
+						max={6}
+						onChange={numOfColumns}
+						value={props.attributes.numberColumns}
 					/>
 				</PanelBody>
 			</InspectorControls>

@@ -47,7 +47,8 @@ function register_dynamic_block_action() {
 					'type' => 'string',
 				),
 				'numberColumns'     => array(
-					'type' => 'string',
+					'type'    => 'number',
+					'default' => 3,
 				),
 				'selectedCategory'  => array(
 					'type' => 'string',
@@ -92,7 +93,7 @@ function my_plugin_render_block_latest_post( $attributes ) {
 			while ( $posts->have_posts() ) {
 				$posts->the_post();
 				?>
-			<div>
+			<div class="latest-post">
 			<h4><?php echo esc_html( get_the_title() ); ?></h4>
 				<?php
 				if ( $attributes['showPostThumbnail'] ) {

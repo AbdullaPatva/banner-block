@@ -11,6 +11,10 @@
 	padding: 2px;
 }
 
+.wp-container-7 > * {
+	max-width: unset !important;
+}
+
 .latest-posts-block {
 	width: 80%;
 	margin: 0 auto;
@@ -19,4 +23,13 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	text-align: center;
+
+	@for $i from 1 through 6 {
+		&.has-#{$i}-columns {
+
+			.latest-post {
+				width: calc(100% / #{$i} - 20px);
+			}
+		}
+	}
 }

@@ -31,7 +31,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const allAttr = {
   numberColumns: {
-    type: 'string'
+    type: 'number',
+    default: 3
   },
   numberPosts: {
     type: 'string'
@@ -53,6 +54,12 @@ const allAttr = {
 };
 
 function latestPosts(props) {
+  const numOfColumns = value => {
+    props.setAttributes({
+      numberColumns: value
+    });
+  };
+
   const onChangeCategory = value => {
     props.setAttributes({
       selectedCategory: value
@@ -103,25 +110,33 @@ function latestPosts(props) {
   };
 
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Block Settings"),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Block Settings'),
     initialOpen: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Select Category"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Select Category'),
     value: props.attributes.selectedCategory,
     onChange: onChangeCategory,
     options: getCategoryNames()
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Show Excerpt ?"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Show Excerpt ?'),
     onChange: onChangeShowExcerpt,
     checked: props.attributes.showExcerpt
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Show Featured Images ?"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Show Featured Images ?'),
     onChange: onChangeShowPostThumbnail,
     checked: props.attributes.showPostThumbnail
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Number of posts to show"),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Number of posts to show'),
     onChange: onChangeNumberPosts,
     value: props.attributes.numberPosts
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Block Style")
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Columns'),
+    min: 1,
+    max: 6,
+    onChange: numOfColumns,
+    value: props.attributes.numberColumns
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_6___default()), {
     block: "my-first-dynamic-gutenberg-block/latest-post",
     attributes: {
