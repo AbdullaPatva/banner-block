@@ -50,6 +50,9 @@ const allAttr = {
   showPostThumbnail: {
     type: 'boolean',
     default: true
+  },
+  showFeaturedPosts: {
+    type: 'boolean'
   }
 };
 
@@ -81,6 +84,12 @@ function latestPosts(props) {
   const onChangeShowPostThumbnail = value => {
     props.setAttributes({
       showPostThumbnail: value
+    });
+  };
+
+  const onChangeShowFeaturedPosts = value => {
+    props.setAttributes({
+      showFeaturedPosts: value
     });
   };
 
@@ -117,6 +126,10 @@ function latestPosts(props) {
     value: props.attributes.selectedCategory,
     onChange: onChangeCategory,
     options: getCategoryNames()
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Number of posts to show'),
+    onChange: onChangeNumberPosts,
+    value: props.attributes.numberPosts
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Show Excerpt ?'),
     onChange: onChangeShowExcerpt,
@@ -125,12 +138,12 @@ function latestPosts(props) {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Show Featured Images ?'),
     onChange: onChangeShowPostThumbnail,
     checked: props.attributes.showPostThumbnail
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Number of posts to show'),
-    onChange: onChangeNumberPosts,
-    value: props.attributes.numberPosts
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Show Featured Posts Only ?'),
+    onChange: onChangeShowFeaturedPosts,
+    checked: props.attributes.showFeaturedPosts
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)("Block Style")
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Block Style')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Columns'),
     min: 1,
@@ -145,7 +158,8 @@ function latestPosts(props) {
       numberPosts: props.attributes.numberPosts,
       numberColumns: props.attributes.numberColumns,
       showExcerpt: props.attributes.showExcerpt,
-      showPostThumbnail: props.attributes.showPostThumbnail
+      showPostThumbnail: props.attributes.showPostThumbnail,
+      showFeaturedPosts: props.attributes.showFeaturedPosts
     },
     httpMethod: "POST"
   }));
@@ -157,8 +171,7 @@ function latestPosts(props) {
   category: 'text',
   attributes: allAttr,
   supports: {
-    html: false,
-    align: ['wide', 'full']
+    html: false
   },
   edit: latestPosts,
 

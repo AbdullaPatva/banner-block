@@ -33,6 +33,9 @@ const allAttr = {
 		type: 'boolean',
 		default: true,
 	},
+	showFeaturedPosts: {
+		type: 'boolean',
+	},
 };
 
 function latestPosts(props) {
@@ -54,6 +57,10 @@ function latestPosts(props) {
 
 	const onChangeShowPostThumbnail = (value) => {
 		props.setAttributes({ showPostThumbnail: value });
+	};
+
+	const onChangeShowFeaturedPosts = (value) => {
+		props.setAttributes({ showFeaturedPosts: value });
 	};
 
 	const getCategoryNames = () => {
@@ -87,6 +94,11 @@ function latestPosts(props) {
 						onChange={onChangeCategory}
 						options={getCategoryNames()}
 					/>
+					<TextControl
+						label={__('Number of posts to show')}
+						onChange={onChangeNumberPosts}
+						value={props.attributes.numberPosts}
+					/>
 					<ToggleControl
 						label={__('Show Excerpt ?')}
 						onChange={onChangeShowExcerpt}
@@ -97,10 +109,10 @@ function latestPosts(props) {
 						onChange={onChangeShowPostThumbnail}
 						checked={props.attributes.showPostThumbnail}
 					/>
-					<TextControl
-						label={__('Number of posts to show')}
-						onChange={onChangeNumberPosts}
-						value={props.attributes.numberPosts}
+					<ToggleControl
+						label={__('Show Featured Posts Only ?')}
+						onChange={onChangeShowFeaturedPosts}
+						checked={props.attributes.showFeaturedPosts}
 					/>
 				</PanelBody>
 				<PanelBody title={__('Block Style')}>
@@ -122,6 +134,7 @@ function latestPosts(props) {
 					numberColumns: props.attributes.numberColumns,
 					showExcerpt: props.attributes.showExcerpt,
 					showPostThumbnail: props.attributes.showPostThumbnail,
+					showFeaturedPosts: props.attributes.showFeaturedPosts,
 				}}
 				httpMethod="POST"
 			/>
@@ -136,7 +149,6 @@ registerBlockType('my-first-dynamic-gutenberg-block/latest-post', {
 	attributes: allAttr,
 	supports: {
 		html: false,
-		align: ['wide', 'full'],
 	},
 	edit: latestPosts,
 	save() {
