@@ -17,6 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+
+define( 'MY_PLUGIN_PATH', plugin_dir_url( __FILE__ ) );
+
 function register_dynamic_block_action() {
 
 	wp_register_script(
@@ -89,6 +92,24 @@ function my_plugin_render_block_latest_post( $attributes ) {
 		$meta_value = 'yes';
 	}
 
+	$terms_year = array(
+		'post_type' => 'post',
+	);
+
+	$years      = array();
+	$query_year = new WP_Query( $terms_year );
+
+	if ( $query_year->have_posts() ) :
+		while ( $query_year->have_posts() ) :
+			$query_year->the_post();
+			$year = get_the_date( 'Y' );
+			if ( ! in_array( $year, $years ) ) {
+				$years[] = $year;
+			}
+		endwhile;
+	endif;
+	wp_reset_postdata();
+
 	$args = array(
 		'cat'            => $cat_name,
 		'posts_per_page' => $number_posts_per_page,
@@ -106,6 +127,21 @@ function my_plugin_render_block_latest_post( $attributes ) {
 	ob_start();
 	if ( $posts->have_posts() ) {
 		?>
+		<div class="search-sort-filters">
+			<form id="search-form-filter" action="<?php echo admin_url( 'admin-ajax.php' ); ?>" method="POST">
+			<select name="post_year">
+				<?php
+				foreach ( $years as $key => $value ) {
+					?>
+					<option key="<?php echo $key; ?>" value="<?php echo $value; ?>"><?php echo $value; ?></option>
+					<?php
+				}
+				?>
+			</select>
+			<input type="search" name="post_name" class="post-name" placeholder="Search posts here..." />
+			<input type="hidden" name="action" value="post_filter" >
+			</form>
+		</div>
 		<div class="latest-posts-block has-<?php echo isset( $attributes['numberColumns'] ) ? esc_attr( $attributes['numberColumns'] ) : '3'; ?>-columns">
 			<?php
 			while ( $posts->have_posts() ) {
@@ -191,3 +227,57 @@ function add_custom_meta_box() {
 	add_meta_box( 'checkbox-meta-box', __( 'Featured Post' ), 'meta_box_markup', $post_types, 'advanced', 'default', null );
 }
 add_action( 'add_meta_boxes', 'add_custom_meta_box' );
+
+/**
+ * Enqueing Ajax JS File
+ */
+function frontend_scripts() {
+
+	wp_register_script( 'ajaxfilehandle', MY_PLUGIN_PATH . 'assets/js/ajax.js', array( 'jquery' ), '', true );
+	wp_enqueue_script( 'ajaxfilehandle' );
+	wp_enqueue_script( 'jquery' );
+}
+
+add_action( 'wp_enqueue_scripts', 'frontend_scripts' );
+
+/**
+ * Ajax Call for search filter
+ *
+ * @return void
+ */
+function filter_post_asb() {
+
+	$args  = array(
+		'post_type' => 'post',
+		'year'      => $_POST['post_year'],
+		's'         => $_POST['post_name'],
+	);
+	$query = new WP_Query( $args );
+
+	ob_start();
+	if ( $query->have_posts() ) :
+		while ( $query->have_posts() ) :
+			$query->the_post();
+			?>
+	<div class="latest-post">
+		<h4><?php echo esc_html( get_the_title() ); ?></h4>
+			<?php
+				echo get_the_post_thumbnail( '', 'medium' );
+				echo esc_html( the_excerpt() );
+			?>
+	</div>
+			<?php
+		endwhile;
+		wp_reset_postdata();
+	endif;
+	echo ob_get_clean();
+
+	// OR
+	// $html = ob_get_clean();
+	// echo json_encode( array( 'html' => $html ) );
+	exit;
+}
+
+add_action( 'wp_ajax_post_filter', 'filter_post_asb' );
+add_action( 'wp_ajax_nopriv_post_filter', 'filter_post_asb' );
+
